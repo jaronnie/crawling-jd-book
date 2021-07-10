@@ -30,13 +30,13 @@ def getItemInfoById(shopId):
     url = 'https://item.jd.com/%s.html' % shopId
     res = requests.get(url=url, headers=headers)
     data = ''
-    if os.path.exists('jd-html/item/wenxue/' + shopId + '.html'):
+    if os.path.exists('jd-html/item/science/' + shopId + '.html'):
         print("read" + shopId + '.html')
-        with codecs.open('jd-html/item/wenxue/' + shopId + '.html', 'r', encoding='utf-8') as fp:
+        with codecs.open('jd-html/item/science/' + shopId + '.html', 'r', encoding='utf-8') as fp:
             data = fp.read()
     else:
         data = res.content.decode('utf-8')
-        with codecs.open('jd-html/item/wenxue/' + shopId + '.html', 'w', encoding='utf-8') as fp:
+        with codecs.open('jd-html/item/science/' + shopId + '.html', 'w', encoding='utf-8') as fp:
             fp.write(data)
     soup = BeautifulSoup(data, 'html.parser')
     item_info = soup.find('body')
@@ -165,9 +165,9 @@ def getCommentInfo(shopId):
         'cookie': '3AB9D23F7A4B3C9B=D3OAJKRHRTXMRFJZFYLTOT3HKZVMQCMGKOMQAFBWIOW7YQBZF6JP2SVV5IO5XN2ITCHJAGBW2RZ4TYJFIPDHZGJUJ4'}
 
     data = ""
-    if os.path.exists('jd-html/commentInfo/wenxue/' + shopId + '.html'):
+    if os.path.exists('jd-html/commentInfo/science/' + shopId + '.html'):
         print("read" + shopId + '.html')
-        with codecs.open('jd-html/commentInfo/wenxue/' + shopId + '.html', 'r', encoding='utf-8') as fp:
+        with codecs.open('jd-html/commentInfo/science/' + shopId + '.html', 'r', encoding='utf-8') as fp:
             data = fp.read()
     else:
         try:
@@ -176,7 +176,7 @@ def getCommentInfo(shopId):
         except:
             print("解码失败")
         else:
-            with codecs.open('jd-html/commentInfo/wenxue/' + shopId + '.html', 'w', encoding='utf-8') as fp:
+            with codecs.open('jd-html/commentInfo/science/' + shopId + '.html', 'w', encoding='utf-8') as fp:
                 fp.write(data)
     if data == "":
         return None
@@ -223,15 +223,15 @@ def getFavorableRate(shopId):
 
 # 获取每页前30条书籍信息
 def shopWebsiteFirst(pageSize):
-    url = "https://search.jd.com/Search?keyword=文学书籍&psort=3&wq=文学书籍&psort=3&pvid=a9b532c5effd42a8a1887fc22248cded&page=%d&s=61&click=0"
+    url = "https://search.jd.com/Search?keyword=科学书籍&wq=科学书籍&pvid=77ba416b38b04d1cb6812f66447ab2dd&page=%d&s=56&click=0"
     headers = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.64',
         'cookie': '3AB9D23F7A4B3C9B=D3OAJKRHRTXMRFJZFYLTOT3HKZVMQCMGKOMQAFBWIOW7YQBZF6JP2SVV5IO5XN2ITCHJAGBW2RZ4TYJFIPDHZGJUJ4'}
 
     data = ''
-    if os.path.exists('jd-html/' + str(pageSize) + '-wenxue.html'):
-        print("read" + str(pageSize) + '-wenxue.html')
-        with codecs.open('jd-html/' + str(pageSize) + '-wenxue.html', 'r', encoding='utf-8') as fp:
+    if os.path.exists('jd-html/' + str(pageSize) + '-science.html'):
+        print("read" + str(pageSize) + '-science.html')
+        with codecs.open('jd-html/' + str(pageSize) + '-science.html', 'r', encoding='utf-8') as fp:
             data = fp.read()
     else:
         try:
@@ -240,7 +240,7 @@ def shopWebsiteFirst(pageSize):
         except:
             print("解码失败")
         else:
-            with codecs.open('jd-html/' + str(pageSize) + '-wenxue.html', 'w', encoding='utf-8') as fp:
+            with codecs.open('jd-html/' + str(pageSize) + '-science.html', 'w', encoding='utf-8') as fp:
                 fp.write(data)
     soup = BeautifulSoup(data, 'html.parser')
     allShop = soup.findAll('li', attrs={'class': 'gl-item'})
@@ -252,20 +252,20 @@ def shopWebsiteLast(pageSize):
     # 获取当前的Unix时间戳，并且保留小数点后5位
     a = time.time()
     b = '%.5f' % a
-    url = 'https://search.jd.com/Search?keyword=文学书籍&psort=3&wq=文学书籍&psort=3&pvid=a9b532c5effd42a8a1887fc22248cded&page=' + str(
+    url = 'https://search.jd.com/Search?keyword=科学书籍&wq=科学书籍&pvid=77ba416b38b04d1cb6812f66447ab2dd&page=' + str(
         pageSize + 1) + '&s=' + str(48 * pageSize - 20) + '&scrolling=y&log_id=' + str(b)
     header = {'authority': 'search.jd.com',
               'method': 'GET',
-              'path': '/s_new.php?keyword=%E6%96%87%E5%AD%A6%E4%B9%A6%E7%B1%8D&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=%E6%96%87%E5%AD%A6%E4%B9%A6%E7%B1%8D',
+              'path': '/s_new.php?keyword=%E7%A7%91%E5%AD%A6%E4%B9%A6%E7%B1%8D&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=%E7%A7%91%E5%AD%A6%E4%B9%A6%E7%B1%8D',
               'scheme': 'https',
               'user-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36',
               'x-requested-with': 'XMLHttpRequest',
               }
 
     data = ''
-    if os.path.exists('jd-html/' + str(pageSize + 1) + '-wenxue.html'):
-        print("read" + str(pageSize + 1) + '-wenxue.html')
-        with codecs.open('jd-html/' + str(pageSize + 1) + '-wenxue.html', 'r', encoding='utf-8') as fp:
+    if os.path.exists('jd-html/' + str(pageSize + 1) + '-science.html'):
+        print("read" + str(pageSize + 1) + '-science.html')
+        with codecs.open('jd-html/' + str(pageSize + 1) + '-science.html', 'r', encoding='utf-8') as fp:
             data = fp.read()
     else:
         try:
@@ -274,7 +274,7 @@ def shopWebsiteLast(pageSize):
         except:
             print("解码失败")
         else:
-            with codecs.open('jd-html/' + str(pageSize + 1) + '-wenxue.html', 'w', encoding='utf-8') as fp:
+            with codecs.open('jd-html/' + str(pageSize + 1) + '-science.html', 'w', encoding='utf-8') as fp:
                 fp.write(data)
     soup = BeautifulSoup(data, 'html.parser')
     allShop = soup.findAll('li', attrs={'class': 'gl-item'})
@@ -286,12 +286,13 @@ shop_info = []
 for i in range(1, 16, 2):
     shop_id = getIdByPageSize(i)
     for id in shop_id:
-        print(id)
         print("正在写入", i, "页数据")
         print("商品id", id)
+        print(getName(id))
+        # time.sleep(3)
         shop_info.append(id)
         shop_info.append(getName(id))
-        shop_info.append("文学")
+        shop_info.append("科学")
         shop_info.append(getAuthor(id))
         shop_info.append(getBookPageSize(id))
         shop_info.append(getOriginPrice(id))
@@ -300,11 +301,12 @@ for i in range(1, 16, 2):
         shop_info.append(getCommentsCount(id))
         shop_info.append(getFavorableRate(id))
         shop_info.append(getPublishTime(id))
+        # time.sleep(2)
 
 
 # 写入csv文件
 b = [shop_info[i:i + 11] for i in range(0, len(shop_info), 11)]
-with open("store/jd-item-info-wenxue.csv", 'w+', encoding='utf-8') as fp:
+with open("store/jd-item-info-science.csv", 'w+', encoding='utf-8') as fp:
     for value in b:
         fp.write('\n')
         fp.write(",".join(value))

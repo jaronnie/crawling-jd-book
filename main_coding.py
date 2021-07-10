@@ -304,7 +304,7 @@ for i in range(1, 16, 2):
 
 # 写入csv文件
 b = [shop_info[i:i + 11] for i in range(0, len(shop_info), 11)]
-with open("jd-item-info-coding.csv", 'w+', encoding='utf-8') as fp:
+with open("store/jd-item-info-coding.csv", 'w+', encoding='utf-8') as fp:
     for value in b:
         fp.write('\n')
         fp.write(",".join(value))
