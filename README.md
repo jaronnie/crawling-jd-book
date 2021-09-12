@@ -35,7 +35,7 @@
 
 爬虫：
 
-![image-20210710091450220](http://picture.nj-jay.com/image-20210710091450220.png)
+![image-20210710091450220](http://resource.gocloudcoder.com/image-20210710091450220.png)
 
 为了能确保程序写入文件时不发生异常，我们首先将需要的页面保存到本地。
 
@@ -47,11 +47,11 @@
 
 列表页我们只需要获取商品的ID即可。
 
-![image-20210710091907223](http://picture.nj-jay.com/image-20210710091907223.png)
+![image-20210710091907223](http://resource.gocloudcoder.com/image-20210710091907223.png)
 
 拿到商品的ID之后，我们就可以跳转到商品的具体页面，获取我们需要的所有数据。
 
-![image-20210710092112457](http://picture.nj-jay.com/image-20210710092112457.png)
+![image-20210710092112457](http://resource.gocloudcoder.com/image-20210710092112457.png)
 
 我们根据每个字段封装了函数，每个函数的参数都是商品的ID。
 
